@@ -29,6 +29,18 @@
         <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
     <![endif]-->
 
+    <script type="text/javascript">
+        function search(query) {
+            $.get( "/search?q=" + query, function( data ) {
+                var str = "";
+                for (var i = 0, len = data.length; i < len; i++) {
+                    str += "<span>"+data[i].termine+":</span>&nbsp;<span>"+data[i].definizione+"</span>";
+                    str+="<br/>";
+                }
+              $( "#result" ).html( str );
+            });
+        }
+    </script>
 </head>
 
 <body>
@@ -90,12 +102,14 @@
                 <div class="post-preview">
                     <a href="post.html">
                         <h2 class="post-title">
-                            Man must explore, and this is exploration at its greatest
+                            Dizionario
                         </h2>
-                        <h3 class="post-subtitle">
-                            Problems look mighty small from 150 miles up
-                        </h3>
                     </a>
+
+                        <div>
+                            cerca: <input type="text" onkeyup="search(this.value);" onkeydown="search(this.value);"/>
+                        </div>
+                        <div id="result"></div>
                     <p class="post-meta">Posted by <a href="#">Start Bootstrap</a> on September 24, 2014</p>
                 </div>
                 <hr>
