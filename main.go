@@ -25,6 +25,8 @@ func searchHandler(w http.ResponseWriter, r *http.Request) {
 
 	w.Header().Set("Content-Type", "application/json")
 	rows, err := db.Queryx("SELECT * FROM definizioni WHERE definizioni MATCH ? ORDER BY rank;", q)
+	defer rows.Close()
+
 	if (err != nil) {
 		log.Fatal(err)
 	}
